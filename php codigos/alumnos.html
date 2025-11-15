@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Alumnos</title>
+    <style>
+        /* Estilos Generales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #333;
+        }
+
+        /* Contenedor Principal (para centrar y agrupar) */
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+            margin-bottom: 25px;
+        }
+
+        h1, h2 {
+            color: #007bff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Estilos del Formulario */
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-top: 10px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        br {
+            display: none; /* Quitamos los <br> para usar flexbox */
+        }
+
+        /* Estilos de Botones */
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            gap: 10px; /* Espacio entre botones */
+        }
+        
+        button {
+            padding: 12px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            flex-grow: 1;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        /* Botones de Operación (Insertar/Actualizar/Borrar) */
+        .button-group button:nth-child(1) { /* Insertar */
+            background-color: #28a745;
+            color: white;
+        }
+        .button-group button:nth-child(2) { /* Actualizar */
+            background-color: #ffc107;
+            color: #333;
+        }
+        .button-group button:nth-child(3) { /* Borrar */
+            background-color: #dc3545;
+            color: white;
+        }
+
+        /* Botón de Consulta */
+        .consulta-form button {
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            margin-top: 15px;
+        }
+
+        /* Hover Effects */
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+    </style>
+    <script>
+        function enviarFormulario(accion) {
+            document.getElementById('accion').value = accion;
+            document.getElementById('formulario').submit();
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1><span style="color: #555;">🎓</span> Gestión de Alumnos</h1>
+        <form id="formulario" action="alumnos.php" method="POST">
+            <input type="hidden" id="accion" name="accion">
+            
+            <label for="id">ID (solo para actualizar o borrar):</label>
+            <input type="number" id="id" name="id">
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" required>
+            
+            <label for="edad">Edad:</label>
+            <input type="number" id="edad" name="edad" required>
+
+            <label for="curso">Curso:</label>
+            <input type="text" id="curso" name="curso">
+
+            <div class="button-group">
+                <button type="button" onclick="enviarFormulario('insertar')">Insertar</button>
+                <button type="button" onclick="enviarFormulario('actualizar')">Actualizar</button>
+                <button type="button" onclick="enviarFormulario('borrar')">Borrar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="container consulta-form">
+        <h2>Consulta de Alumnos</h2>
+        <form action="alumnos.php" method="GET">
+            <button type="submit">Ver Alumnos</button>
+        </form>
+    </div>
+</body>
+</html>
